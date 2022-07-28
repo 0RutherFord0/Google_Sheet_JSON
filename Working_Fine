@@ -1,0 +1,18 @@
+function doGet(req) {
+
+var doc = SpreadsheetApp.getActiveSpreadsheet();
+var sheet = doc.getSheetByName('Sheet1'); var values = sheet.getDataRange().getValues();
+
+var output = [];
+for (var i = 0; i<values.length; i++) {
+  var row = {};
+  row['tittle'] = values[i][0];
+  row['description'] = values[i][1];
+  row['status'] = values[i][2];
+  row['article_type'] = values[i][3];
+  row['article_type'] = values[i][4];
+  output.push(row);
+}
+
+return ContentService.createTextOutput(JSON.stringify({data: output})).setMimeType (ContentService.MimeType.JSON)
+}
